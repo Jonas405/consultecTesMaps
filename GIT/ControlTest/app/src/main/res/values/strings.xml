@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ControlTest</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="entrar">Entrar</string>
+    <string name="guardar_usuario">Guardar Usuario</string>
+    <string name="olvido_contraseña">¿Olvidaste tu contraseña?</string>
+    <string name="registro">Registro</string>
+    <string name="Username">Usuario</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>.
+    <string name="registar">Registrar</string>
+    <string name="computadora">Desktop</string>
+    <string name="temperatura">Temperatura</string>
+    <string name="voltaje">Voltaje</string>
+    <string name="estado">Estado</string>
+    <string name="mensaje1">El usuario no esta registrado</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="apagar">Apagar</string>
+    <string name="consulta">Consulta</string>
+    <string name="mensaje10">El usuario se ha registrado</string>
+    <string name="mensaje11">Error intente nuevamente</string>
+    <string name="mensaje12">Consulta exitosa</string>
+    <string name="mensaje13">Para agregar equipo contacte a soporte</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>

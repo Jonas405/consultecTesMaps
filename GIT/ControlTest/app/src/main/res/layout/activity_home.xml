@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/wallpaper3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="vnzla.jonasleon8.controltest.HomeActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Username"
+        android:text="Jonas Leon"
+        android:textSize="28dp"
+        android:textColor="@color/colorLetrasLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/desktop"
+        android:id="@+id/imagePc"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/Username"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pc1"
+        android:text="Pc Jonas"
+        android:textSize="20dp"
+        android:textColor="@color/colorLetrasLogin"
+        android:layout_below="@+id/imagePc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/botonConsulta"
+        app:srcCompat="@drawable/estado"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imagePc"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consulta"
+        android:textSize="20dp"
+        android:textColor="@color/iniciocolor"
+        android:layout_below="@+id/botonConsulta"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/botonApagar"
+        app:srcCompat="@drawable/apagar"
+        android:layout_below="@+id/imagePc"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apagar"
+        android:textSize="20dp"
+        android:textColor="@color/voltaje"
+        android:layout_below="@+id/botonApagar"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/botonEliminar"
+        app:srcCompat="@drawable/borrar"
+        android:layout_below="@+id/imagePc"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:textSize="20dp"
+        android:textColor="@color/voltaje"
+        android:layout_below="@+id/botonApagar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/agregar"
+        android:id="@+id/imageButton1"
+        android:layout_alignParentLeft="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/desktop"
+        android:id="@+id/imagePc2"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/botonConsulta"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pc2"
+        android:text="Pc Andreina"
+        android:textSize="20dp"
+        android:textColor="@color/colorLetrasLogin"
+        android:layout_below="@+id/imagePc2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/estado"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imagePc2"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consulta"
+        android:textSize="20dp"
+        android:textColor="@color/iniciocolor"
+        android:layout_below="@+id/imagePc2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/apagar"
+        android:layout_below="@+id/imagePc2"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apagar"
+        android:textSize="20dp"
+        android:textColor="@color/voltaje"
+        android:layout_below="@+id/imagePc2"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/borrar"
+        android:layout_below="@+id/imagePc2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:textSize="20dp"
+        android:textColor="@color/voltaje"
+        android:layout_below="@+id/imagePc2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>
+
