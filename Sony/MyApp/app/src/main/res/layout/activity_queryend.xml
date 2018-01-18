@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonConsulta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consulta"/>
+
+    <TextView
+        android:id="@+id/id_equipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Equipo"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/desktop"
+        android:id="@+id/computadora"
+        android:layout_gravity="center"
+        android:layout_below="@+id/botonConsulta2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/pc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maquina"
+        />
+
+    <TextView
+        android:id="@+id/valTmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperatura"
+        />
+
+    <TextView
+        android:id="@+id/valVol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltaje"
+        />
+
+    <TextView
+        android:id="@+id/valEdo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        />
+
+    <Button
+        android:id="@+id/buttonApagar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apagar"/>
+
+
+</LinearLayout>
