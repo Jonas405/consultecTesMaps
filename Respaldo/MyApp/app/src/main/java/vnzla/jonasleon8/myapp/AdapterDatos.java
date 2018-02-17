@@ -26,7 +26,7 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
     public ViewHolderDatos onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.devicelist, null, false);
-        //Agregamos el evento onClick manual y creamos que se mantenga escuchando nuestra lista
+
         view.setOnClickListener(this);
 
         return new ViewHolderDatos(view);
@@ -76,11 +76,11 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
         public void asignarDatos(Equipo equipo) {
 
-            txIdEquipo.setText(equipo.getIdEquipo());
-            txTemperatura.setText(equipo.getTemperatura());
-            txVoltaje.setText(equipo.getVoltaje());
-            txPc.setText(equipo.getPc());
-            txEstado.setText(equipo.getEstado());
+            txIdEquipo.setText("Equipo: " + equipo.getIdEquipo());
+            txTemperatura.setText("Temperatura: " + equipo.getTemperatura() + "ºC" );
+            txVoltaje.setText("Voltaje: " + equipo.getVoltaje() + "V" );
+            txPc.setText("Maquina: " + equipo.getPc());
+            txEstado.setText("Estado: " + equipo.getEstado());
 
         }
     }

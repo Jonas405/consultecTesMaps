@@ -8,12 +8,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ipc"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
-        <!--<activity android:name=".SplashActivity">-->
+        <activity android:name=".Login"/>
+        <activity android:name=".SplashActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +35,11 @@
        <activity
             android:name=".QueyEnd"
             android:label="Gestion"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+
+        <activity
+            android:name=".RegistroEquipo"
+            android:label="Registrar Equipos"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
 

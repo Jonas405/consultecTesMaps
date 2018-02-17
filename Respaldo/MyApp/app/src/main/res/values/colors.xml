@@ -6,4 +6,5 @@
     <color name="colorLetrasLogin">#ffffff</color>
     <color name="iniciocolor">#30e3ff</color>
     <color name="voltaje">#f40004</color>
+    <color name="ControlTest">#000000</color>
 </resources>

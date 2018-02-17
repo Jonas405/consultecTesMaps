@@ -4,9 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_login"
-    android:background="@drawable/fondologin">
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/fondologin"
+    android:gravity="center"
+    android:layout_centerInParent="true">
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="40dp"
         android:text="ControlTest"
@@ -16,7 +19,7 @@
 
     <TextView
         android:text="Email"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -29,7 +32,7 @@
 
         />
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -47,7 +50,7 @@
 
     <TextView
         android:text="Password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -59,7 +62,7 @@
         />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -75,23 +78,21 @@
 
     <Button
         android:text="Login"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonEnter"
-        android:layout_gravity="bottom"
-        android:gravity="center"
+
 
         />
 
 
     <Button
         android:text="registro"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonReg"
-        android:layout_gravity="bottom"
         android:layout_marginTop="10dp"
-        android:gravity="center"
+
 
       />
 

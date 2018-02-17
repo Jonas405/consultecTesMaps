@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 /**
@@ -35,7 +37,8 @@ import java.util.Map;
 
 public class Home extends AppCompatActivity {
 
-    Button buttonConsulta;
+
+    ImageButton botonAgrearEquipo;
     ArrayList<Equipo> listaEquipos;
     RecyclerView recycler;
     AdapterDatos adapter;
@@ -43,13 +46,13 @@ public class Home extends AppCompatActivity {
     private Snackbar snackbar;
     private static String URL = "http://remote-admin.000webhostapp.com/lista_equipos.php";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-   //     buttonConsulta = (Button) findViewById(R.id.buttonConsulta);
 
-
+        botonAgrearEquipo = (ImageButton) findViewById(R.id.botonAgrearEquipo);
         recycler = (RecyclerView) findViewById(R.id.recyclerEquipo);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         pd = new ProgressDialog(Home.this);
@@ -59,56 +62,52 @@ public class Home extends AppCompatActivity {
         pd.setMessage("Consultando equipos ...");
         pd.show();
 
-        Bundle miBundle=this.getIntent().getExtras();
 
-        if (miBundle!=null){
-
-            String usuario=miBundle.getString("usuario");
-            consultarEquipos(usuario);
-        }
+        final String correo= getIntent().getStringExtra("correo");
+        consultarEquipos(correo);
 
 
-
-
-     adapter = new AdapterDatos(listaEquipos);
+        adapter = new AdapterDatos(listaEquipos);
 
         adapter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
-                 Toast.makeText(getApplicationContext(),"Consultado equipo "+listaEquipos.get(recycler.getChildAdapterPosition(view))
-                        .getIdEquipo(),Toast.LENGTH_LONG).show();
+            //    int indiceLista = recycler.getChildLayoutPosition(view);
 
-//String sDesignation= employeeList.get(0).get("designation");
+                String idEquipoConsulta = listaEquipos.get(recycler.getChildAdapterPosition(view)).getIdEquipo();
+                String pcAconsultar = listaEquipos.get(recycler.getChildAdapterPosition(view)).getPc();
+/*
+                Toast toast = Toast.makeText(getApplicationContext(), idEquipoConsulta, Toast.LENGTH_SHORT);
+                toast.show();*/
 
-                String seleccion= listaEquipos.get(recycler.getChildAdapterPosition(view))
-                        .getIdEquipo();
 
                 Intent miIntent=new Intent(Home.this, QueyEnd.class);
                 Bundle miBundle=new Bundle();
-
-                miBundle.putString("seleccion",listaEquipos.get(recycler.getChildAdapterPosition(view))
-                        .getIdEquipo());
+                miBundle.putString("idEquipoConsulta",idEquipoConsulta);
+                miBundle.putString("pcAconsultar", pcAconsultar);
+                miBundle.putString("correo", correo);
                 miIntent.putExtras(miBundle);
+
                 startActivity(miIntent);
 
 
             }
         });
 
-  /*      buttonReg.setOnClickListener(new View.OnClickListener() {
+        recycler.setAdapter(adapter);
+
+        botonAgrearEquipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goRegistro = new Intent(Login.this, Registration.class);
-                startActivity(goRegistro);
+                Intent RegistroEquipo = new Intent(Home.this, RegistroEquipo.class);
+                startActivity(RegistroEquipo);
             }
         });
-*/
-        recycler.setAdapter(adapter);
     }
 
 
-    private void consultarEquipos(final String usuario)
+    private void consultarEquipos(final String correo)
     {
 
         RequestQueue queue = Volley.newRequestQueue(Home.this);
@@ -181,7 +180,7 @@ public class Home extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("correo", usuario);
+                params.put("correo", correo);
                 return params;
             }
         };

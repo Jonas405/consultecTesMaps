@@ -30,16 +30,11 @@ import java.util.Map;
 public class Registration extends AppCompatActivity
 {
 
-    // Url para Registrar
     private static String S_URL ="https://remote-admin.000webhostapp.com/registro_user2.php";
 
-    // Variables de inputs de usuarios
     EditText editTextNombre, editTextApellido, editTextEmail, editTextPassword;
-    //EditText signUpEmail,signUpName,signUpPassword;
-
-    // Botones para acciones
     Button buttonRegistrar, buttonVolver;
-    //Button signupButton;
+
 
     CheckBox checkBoxTerms;
 
@@ -110,7 +105,7 @@ protected void onCreate(Bundle savedInstanceState) {
             return;
         }
 
-         if (TextUtils.isEmpty(password)) {
+         if (TextUtils.isEmpty(apellido)) {
             editTextApellido.setError("Porfavor ingrese su Apellido");
             editTextApellido.requestFocus();
             return;
@@ -132,9 +127,6 @@ protected void onCreate(Bundle savedInstanceState) {
         pd.show();
 
 
-
-        //  VALIDAR DATOOOOOSSSSSSSSSSSSSSSSSSSSSSSS
-
             RequestQueue queue = Volley.newRequestQueue(Registration.this);
             String response = null;
             final String finalResponse = response;
@@ -145,10 +137,7 @@ protected void onCreate(Bundle savedInstanceState) {
                         @Override
                         public void onResponse(String response) {
                             pd.hide();
-                            //el response esta en string tengo que transformarlo a JSON buscar como si no , no hacer XD y obligar que siempre registre
-                            //Por cada uno de los estatus mostrar un mensaje
-                            //estatus 1 registrado, estatus 0 no se inserta en bd, status 3 un campo vacio
-                            //showSnackbar(response);
+
                             showSnackbar("Usuario Registrado!");
 
     /*

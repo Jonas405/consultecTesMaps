@@ -30,9 +30,8 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
-    //Button loginButton;
+
     Button buttonEnter, buttonReg;
-    //EditText loginUserName, loginPassword;
     EditText editTextEmail, editTextPassword;
     String emailHolder;
 
@@ -46,8 +45,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //loginUserName = (EditText) findViewById(R.id.loginEmail);
-        //loginPassword = (EditText) findViewById(R.id.loginPassword);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
@@ -58,18 +55,17 @@ public class Login extends AppCompatActivity {
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  params.put("email", editTextEmail.getText().toString());
-                params.put("password", editTextPassword.getText().toString()); */
-                loginRequest();
 
-                String usuario= editTextEmail.getText().toString();
+                loginRequest();
 
                 Intent miIntent=new Intent(Login.this, Home.class);
                 Bundle miBundle=new Bundle();
-                miBundle.putString("usuario",editTextEmail.getText().toString());
+                miBundle.putString("correo",editTextEmail.getText().toString());
                 miIntent.putExtras(miBundle);
 
                 startActivity(miIntent);
+
+
                 //Validar si el usuario y el email coinciden para entrar
 
              /*   if( editTextEmail.getText().toString().equals("email")
@@ -120,6 +116,7 @@ public class Login extends AppCompatActivity {
         pd.setMessage("Signing In . . .");
         pd.show();
 
+
         RequestQueue queue = Volley.newRequestQueue(Login.this);
         String response = null;
 
@@ -134,12 +131,17 @@ public class Login extends AppCompatActivity {
                         pd.hide();
                         showSnackbar(response);
 
+                        if(response.equals("Login")){
 
-                        if(response.equals("Login")) {
+                            /*
 
-                            Intent intent = new Intent(Login.this, Home.class);
-                            startActivity(intent);
+                             if ((u.equals(myUser)) && (p.equals(myPass))) {
+                            // do stuff
+                            }
+                              */
+
                         }
+
                     }
                 },
                 new Response.ErrorListener()

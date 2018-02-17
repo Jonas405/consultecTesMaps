@@ -1,6 +1,7 @@
 package vnzla.jonasleon8.myapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,37 +35,41 @@ import java.util.Map;
 
 public class QueyEnd extends AppCompatActivity {
 
-    //EditText editext_temperatura, editext_voltaje, editext_estado;
-    Button buttonApagar, buttonConsulta;
+
+    ArrayList<Equipo> listaEquipos;
+    ImageButton buttonConsulta, buttonApagar, buttonBorrar;
     TextView tvTmp, tvVol, tvEdo, tvIdEq, tvPc;
-    String dp_email, dp_id_equipo, seleccion;
+    String dp_email, dp_id_equipo,pc;
+
 
     private static String URL = "https://remote-admin.000webhostapp.com/query_end.php";
     private Snackbar snackbar;
     private ProgressDialog pd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queryend);
 
+
         pd = new ProgressDialog(QueyEnd.this);
 
-        Bundle miBundle=this.getIntent().getExtras();
+        /////////////Ubicando idEquipo//////////////////////
 
-        if (miBundle!=null){
-
-            String seleccion=miBundle.getString("seleccion");
-            //consultarEquipos(usuario);
-        }
+            String idEquipoConsulta= getIntent().getStringExtra("idEquipoConsulta");
+            String pcAconsultar= getIntent().getStringExtra("pcAconsultar");
+            String correo= getIntent().getStringExtra("correo");
 
         // UBICAR DE PANTALLA ANTERIOR
-        dp_email = "andreinaa.s25@gmail.com";
-        dp_id_equipo = seleccion;
+        dp_email = correo;
+        dp_id_equipo = idEquipoConsulta;
+        pc = pcAconsultar;
 
         // Declaración de botones
-        buttonConsulta = (Button) findViewById(R.id.buttonConsulta);
-        buttonApagar = (Button) findViewById(R.id.buttonApagar);
+        buttonConsulta = (ImageButton) findViewById(R.id.buttonConsulta);
+        buttonApagar = (ImageButton) findViewById(R.id.buttonApagar);
+        buttonBorrar = (ImageButton) findViewById(R.id.buttonBorrar);
 
         // Declaración de Textos
         tvTmp = (TextView) findViewById(R.id.valTmp);
@@ -70,32 +77,41 @@ public class QueyEnd extends AppCompatActivity {
         tvEdo = (TextView) findViewById(R.id.valEdo);
         tvIdEq = (TextView) findViewById(R.id.id_equipo);
         tvPc = (TextView) findViewById(R.id.pc);
-
+        //  tvPc.setText(equipoSeleccionado.getPc());
 
 
         buttonConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
-                Toast.makeText(QueyEnd.this,dp_id_equipo,
-                        Toast.LENGTH_SHORT).show();
+                 consulta();
             }
         });
 
-    /*    buttonApagar.setOnClickListener(new View.OnClickListener() {
+
+       buttonApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                apagar();
             }
-        });*/
+        });
+
+
+        buttonBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                borrar();
+            }
+        });
+
     }
 
 
-   /*     private void consulta(final String seleccion)
+
+   private void consulta()
         {
-            pd.setMessage("Consultado datos de equipos...");
+            pd.setMessage("Consultado datos del equipo...");
             pd.show();
 
             RequestQueue queue = Volley.newRequestQueue(QueyEnd.this);
@@ -110,7 +126,7 @@ public class QueyEnd extends AppCompatActivity {
                         public void onResponse(String response) {
 
                             pd.hide();
-                            showSnackbar(response);
+
 
                             try {
                                 //Transformamos de String a JSONObject
@@ -123,7 +139,7 @@ public class QueyEnd extends AppCompatActivity {
                                 String st, stAux;
 
                                 if ( status == 1 ) {
-                                    System.out.println("acaaaaaa..");
+
 
                                     //Tomamos el Array en la posicion 0 y lo estoy llevando a JSONOBJECT
                                     JSONArray losEquipos = jsonObject.getJSONArray("data");
@@ -155,11 +171,6 @@ public class QueyEnd extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                        *//*
-                        if(response.equals("Login")) {
-
-                            startActivity(new Intent(getApplicationContext(), Welcome.class));
-                        }*//*
                         }
                     },
                     new Response.ErrorListener()
@@ -178,7 +189,7 @@ public class QueyEnd extends AppCompatActivity {
                 {   //Estos son los parametros de consulta para el web Service
                     Map<String, String>  params = new HashMap<String, String>();
                     params.put("correo",  dp_email );
-                    params.put("equipo", seleccion);
+                    params.put("equipo", dp_id_equipo);
                     return params;
                 }
             };
@@ -189,11 +200,11 @@ public class QueyEnd extends AppCompatActivity {
 
     private void apagar()
     {
-        final String URL2, user, pc;
+        final String URL2, user;
 
         // Cambiar estos valores por los del usuario sesionado
-        user = "andreinaa.s25@gmail.com";
-        pc = "pc_andre";
+      //  user = "andreinaa.s25@gmail.com";
+     //   pc = "pc_andre";
 
         URL2 = "https://remote-admin.000webhostapp.com/bandera.php";
 
@@ -213,7 +224,7 @@ public class QueyEnd extends AppCompatActivity {
 
                         pd.hide();
                         showSnackbar("Se ha apagado equipo.");
-                        consulta(seleccion);
+                        consulta();
 
                     }
                 },
@@ -232,8 +243,63 @@ public class QueyEnd extends AppCompatActivity {
             protected Map<String, String> getParams()
             {   //Estos son los parametros de consulta para el web Service
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("user",  user );
+                params.put("user",   dp_email );
                 params.put("pc", pc);
+                return params;
+            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(postRequest);
+
+    }
+
+    private void borrar(){
+
+        final String URL3, user;
+        pd.setMessage("Eliminando datos del equipo...");
+        pd.show();
+
+        URL3 = "https://remote-admin.000webhostapp.com/Delete.php";
+
+        RequestQueue queue = Volley.newRequestQueue(QueyEnd.this);
+        String response = null;
+
+        final String finalResponse = response;
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL3,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+
+                        pd.hide();
+
+                        showSnackbar("Equipo Eliminado!");
+
+                        tvIdEq.setText(" ");
+                        tvPc.setText(" ");
+                        tvTmp.setText(" ");
+                        tvVol.setText(" ");
+                        tvEdo.setText(" ");
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        pd.hide();
+                        Log.d("ErrorResponse", error.toString());
+
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {   //Estos son los parametros de consulta para el web Service
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("correo",  dp_email );
+                params.put("equipo", dp_id_equipo);
                 return params;
             }
         };
@@ -246,8 +312,8 @@ public class QueyEnd extends AppCompatActivity {
         snackbar.make(findViewById(android.R.id.content), stringSnackbar.toString(), Snackbar.LENGTH_LONG)
                 .setActionTextColor(getResources().getColor(R.color.colorPrimary))
                 .show();
-    }
-*/
-}
 
+
+    }
+}
 

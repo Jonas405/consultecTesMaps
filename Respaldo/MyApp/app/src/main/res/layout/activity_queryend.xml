@@ -3,19 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaperregistro"
+    android:layout_centerInParent="true">
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonConsulta"
         android:layout_width="wrap_content"
+        android:src="@drawable/estado"
         android:layout_height="wrap_content"
-        android:text="Consulta"/>
+        android:text="Consulta"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        />
 
     <TextView
         android:id="@+id/id_equipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Equipo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorLetrasLogin"
+        android:textSize="15dp"
         />
 
     <ImageView
@@ -23,16 +33,21 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/desktop"
         android:id="@+id/computadora"
-        android:layout_gravity="center"
         android:layout_below="@+id/botonConsulta2"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        />
+
 
     <TextView
         android:id="@+id/pc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Maquina"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorLetrasLogin"
+        android:textSize="15dp"
         />
 
     <TextView
@@ -40,6 +55,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Temperatura"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorLetrasLogin"
+        android:textSize="15dp"
         />
 
     <TextView
@@ -47,6 +65,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Voltaje"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorLetrasLogin"
+        android:textSize="15dp"
         />
 
     <TextView
@@ -54,13 +75,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estado"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorLetrasLogin"
+        android:textSize="15dp"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonApagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apagar"/>
+        android:src="@drawable/apagar"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+
+    <ImageButton
+        android:id="@+id/buttonBorrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/borrar"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+
 
 
 </LinearLayout>

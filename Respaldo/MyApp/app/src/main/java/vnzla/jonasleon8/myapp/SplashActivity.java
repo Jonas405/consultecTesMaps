@@ -14,7 +14,7 @@ import android.view.WindowManager;
 
 public class SplashActivity extends Activity {
     private final int DURACION_SPLASH = 2000;
-    ProgressDialog progres;
+    private ProgressDialog pd;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,15 @@ public class SplashActivity extends Activity {
 
         new Handler().postDelayed(new Runnable(){
             public void run(){
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, Login.class);
                 startActivity(intent);
                 finish();
 
             };
         }, DURACION_SPLASH);
+
+        pd = new ProgressDialog(SplashActivity.this);
+        pd.setMessage("ControlTest");
+        pd.show();
     }
 }
