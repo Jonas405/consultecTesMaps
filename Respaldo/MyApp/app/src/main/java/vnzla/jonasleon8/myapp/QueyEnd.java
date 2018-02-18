@@ -52,33 +52,25 @@ public class QueyEnd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queryend);
 
-
         pd = new ProgressDialog(QueyEnd.this);
-
-        /////////////Ubicando idEquipo//////////////////////
 
             String idEquipoConsulta= getIntent().getStringExtra("idEquipoConsulta");
             String pcAconsultar= getIntent().getStringExtra("pcAconsultar");
             String correo= getIntent().getStringExtra("correo");
 
-        // UBICAR DE PANTALLA ANTERIOR
         dp_email = correo;
         dp_id_equipo = idEquipoConsulta;
         pc = pcAconsultar;
 
-        // Declaración de botones
         buttonConsulta = (ImageButton) findViewById(R.id.buttonConsulta);
         buttonApagar = (ImageButton) findViewById(R.id.buttonApagar);
         buttonBorrar = (ImageButton) findViewById(R.id.buttonBorrar);
 
-        // Declaración de Textos
         tvTmp = (TextView) findViewById(R.id.valTmp);
         tvVol = (TextView) findViewById(R.id.valVol);
         tvEdo = (TextView) findViewById(R.id.valEdo);
         tvIdEq = (TextView) findViewById(R.id.id_equipo);
         tvPc = (TextView) findViewById(R.id.pc);
-        //  tvPc.setText(equipoSeleccionado.getPc());
-
 
         buttonConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,14 +80,12 @@ public class QueyEnd extends AppCompatActivity {
             }
         });
 
-
        buttonApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                apagar();
             }
         });
-
 
         buttonBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,12 +117,9 @@ public class QueyEnd extends AppCompatActivity {
 
                             pd.hide();
 
-
                             try {
-                                //Transformamos de String a JSONObject
-                                JSONObject jsonObject = new JSONObject(response);
 
-                                System.out.println(jsonObject);
+                                JSONObject jsonObject = new JSONObject(response);
 
                                 int status = jsonObject.getInt("status");
                                 String msg = jsonObject.getString("msg");
@@ -140,32 +127,24 @@ public class QueyEnd extends AppCompatActivity {
 
                                 if ( status == 1 ) {
 
-
-                                    //Tomamos el Array en la posicion 0 y lo estoy llevando a JSONOBJECT
                                     JSONArray losEquipos = jsonObject.getJSONArray("data");
-
                                     st = losEquipos.getJSONObject(0).getString("flag_apagado");
-
                                     if ( st.equals("0") ) {
                                         stAux = "Estado: Encendido";
                                     } else {
                                         stAux = "Estado: Apagado";
                                     }
 
-                                    System.out.println(losEquipos);
                                     tvIdEq.setText("Equipo: " + losEquipos.getJSONObject(0).getString("id_equipo") );
                                     tvPc.setText("Maquina: " + losEquipos.getJSONObject(0).getString("pc_usuario") );
                                     tvTmp.setText("Temperatura: " + losEquipos.getJSONObject(0).getString("temperatura") );
                                     tvVol.setText("Voltaje: " + losEquipos.getJSONObject(0).getString("voltaje") );
                                     tvEdo.setText(stAux);
 
-                                    //System.out.println(losEquipos.getJSONObject(0).getString("voltaje"));
-
                                 } else {
 
                                     pd.hide();
-                                    // Mostrar mensaje
-                                    Toast.makeText(QueyEnd.this, "No se encontraron equipos", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(QueyEnd.this, "No se encontraron equipos", Toast.LENGTH_LONG).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -177,7 +156,7 @@ public class QueyEnd extends AppCompatActivity {
                     {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // error
+
                             pd.hide();
                             Log.d("ErrorResponse", error.toString());
 
@@ -186,7 +165,7 @@ public class QueyEnd extends AppCompatActivity {
             ) {
                 @Override
                 protected Map<String, String> getParams()
-                {   //Estos son los parametros de consulta para el web Service
+                {
                     Map<String, String>  params = new HashMap<String, String>();
                     params.put("correo",  dp_email );
                     params.put("equipo", dp_id_equipo);
@@ -201,10 +180,6 @@ public class QueyEnd extends AppCompatActivity {
     private void apagar()
     {
         final String URL2, user;
-
-        // Cambiar estos valores por los del usuario sesionado
-      //  user = "andreinaa.s25@gmail.com";
-     //   pc = "pc_andre";
 
         URL2 = "https://remote-admin.000webhostapp.com/bandera.php";
 
@@ -223,7 +198,7 @@ public class QueyEnd extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         pd.hide();
-                        showSnackbar("Se ha apagado equipo.");
+                        showSnackbar("Se ha apagado equipo!");
                         consulta();
 
                     }
@@ -232,7 +207,6 @@ public class QueyEnd extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error
                         pd.hide();
                         Log.d("ErrorResponse", error.toString());
 
@@ -241,7 +215,7 @@ public class QueyEnd extends AppCompatActivity {
         ) {
             @Override
             protected Map<String, String> getParams()
-            {   //Estos son los parametros de consulta para el web Service
+            {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("user",   dp_email );
                 params.put("pc", pc);
@@ -287,7 +261,7 @@ public class QueyEnd extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error
+
                         pd.hide();
                         Log.d("ErrorResponse", error.toString());
 
@@ -296,7 +270,7 @@ public class QueyEnd extends AppCompatActivity {
         ) {
             @Override
             protected Map<String, String> getParams()
-            {   //Estos son los parametros de consulta para el web Service
+            {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("correo",  dp_email );
                 params.put("equipo", dp_id_equipo);

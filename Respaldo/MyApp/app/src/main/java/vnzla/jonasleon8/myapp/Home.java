@@ -73,25 +73,15 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view){
 
-            //    int indiceLista = recycler.getChildLayoutPosition(view);
-
                 String idEquipoConsulta = listaEquipos.get(recycler.getChildAdapterPosition(view)).getIdEquipo();
                 String pcAconsultar = listaEquipos.get(recycler.getChildAdapterPosition(view)).getPc();
-/*
-                Toast toast = Toast.makeText(getApplicationContext(), idEquipoConsulta, Toast.LENGTH_SHORT);
-                toast.show();*/
-
-
                 Intent miIntent=new Intent(Home.this, QueyEnd.class);
                 Bundle miBundle=new Bundle();
                 miBundle.putString("idEquipoConsulta",idEquipoConsulta);
                 miBundle.putString("pcAconsultar", pcAconsultar);
                 miBundle.putString("correo", correo);
                 miIntent.putExtras(miBundle);
-
                 startActivity(miIntent);
-
-
             }
         });
 
@@ -120,12 +110,8 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        System.out.println(response);
-                        // Response from the server is in the form if a JSON, so we need a JSON Object
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-
-                            System.out.println(jsonObject);
 
                             int status = jsonObject.getInt("status");
                             String msg = jsonObject.getString("msg");
@@ -150,14 +136,12 @@ public class Home extends AppCompatActivity {
                                     listaEquipos.add(auxEquipo);
                                 }
 
-                                System.out.println(listaEquipos);
                                 pd.hide();
                                 adapter.notifyDataSetChanged();
 
                             } else {
 
                                 pd.hide();
-                                // Mostrar mensaje
                                 Toast.makeText(Home.this, "No se encontraron equipos", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -169,7 +153,6 @@ public class Home extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error
                         pd.hide();
                         System.out.println(error);
                         Log.d("ErrorResponse", error.toString());
@@ -188,10 +171,4 @@ public class Home extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-
-    public void showSnackbar(String stringSnackbar){
-        snackbar.make(findViewById(android.R.id.content), stringSnackbar.toString(), Snackbar.LENGTH_LONG)
-                .setActionTextColor(getResources().getColor(R.color.colorPrimary))
-                .show();
-    }
 }

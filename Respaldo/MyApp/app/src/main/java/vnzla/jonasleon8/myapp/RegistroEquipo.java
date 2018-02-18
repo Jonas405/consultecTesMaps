@@ -82,17 +82,19 @@ public class RegistroEquipo extends AppCompatActivity {
             return;
         }
 
+        if (TextUtils.isEmpty(id_equipo)) {
+            editTextid_equipo.setError("Porfavor ingrese el Numero de equipo");
+            editTextid_equipo.requestFocus();
+            return;
+        }
+
         if (TextUtils.isEmpty(estado)) {
             editTextEstado.setError("Porfavor ingrese el estado");
             editTextEstado.requestFocus();
             return;
         }
 
-        if (TextUtils.isEmpty(id_equipo)) {
-            editTextid_equipo.setError("Porfavor ingrese el Numero de equipo");
-            editTextid_equipo.requestFocus();
-            return;
-        }
+
 
 
         pd.setMessage("Registrando Equipo...");
@@ -109,6 +111,11 @@ public class RegistroEquipo extends AppCompatActivity {
                     public void onResponse(String response) {
                         pd.hide();
                         showSnackbar("Equipo Registrado!");
+
+                        editTextEmail.setText(" ");
+                        editTextMaquina.setText(" ");
+                        editTextEstado.setText(" ");
+                        editTextid_equipo.setText(" ");
 
                     }
                 },
@@ -141,7 +148,7 @@ public class RegistroEquipo extends AppCompatActivity {
     }
 
     public void showSnackbar(String stringSnackbar){
-        snackbar.make(findViewById(android.R.id.content), stringSnackbar.toString(), Snackbar.LENGTH_SHORT)
+        snackbar.make(findViewById(android.R.id.content), stringSnackbar.toString(), Snackbar.LENGTH_LONG)
                 .setActionTextColor(getResources().getColor(R.color.colorPrimary))
                 .show();
     }

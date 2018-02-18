@@ -21,6 +21,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,13 +34,9 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
-
     Button buttonEnter, buttonReg;
     EditText editTextEmail, editTextPassword;
-    String emailHolder;
-
-    TextView registerTextView;
-    private static String URL = "https://remote-admin.000webhostapp.com/login.php";
+    private static String URL = "https://remote-admin.000webhostapp.com/login100.php";
     private Snackbar snackbar;
     private ProgressDialog pd;
 
@@ -55,36 +55,11 @@ public class Login extends AppCompatActivity {
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 loginRequest();
-
-                Intent miIntent=new Intent(Login.this, Home.class);
-                Bundle miBundle=new Bundle();
-                miBundle.putString("correo",editTextEmail.getText().toString());
-                miIntent.putExtras(miBundle);
-
-                startActivity(miIntent);
-
-
-                //Validar si el usuario y el email coinciden para entrar
-
-             /*   if( editTextEmail.getText().toString().equals("email")
-                        &editTextPassword.getText().toString().equals("password"))
-                {
-                    Toast.makeText(Login.this,"Email y password correctos",
-                            Toast.LENGTH_SHORT).show();
-                    Intent goHome = new Intent(Login.this, Home.class);
-                    startActivity(goHome);
-                }else{
-                    Toast.makeText(Login.this,"Usuario no registrado",
-                            Toast.LENGTH_LONG).show();
-                }*/
-
             }
         });
 
-
-       buttonReg.setOnClickListener(new View.OnClickListener() {
+        buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goRegistro = new Intent(Login.this, Registration.class);
@@ -94,12 +69,11 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginRequest(){
-    //Validaciones
 
         final String username = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
 
-        //validating inputs
+
         if (TextUtils.isEmpty(username)) {
             editTextEmail.setError("Porfavor ingrese email");
             editTextEmail.requestFocus();
@@ -112,8 +86,7 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        //Fin de validaciones
-        pd.setMessage("Signing In . . .");
+        pd.setMessage("Validando usuario. . .");
         pd.show();
 
 
@@ -127,20 +100,40 @@ public class Login extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-// Validar si los datos son correctos ingresar
+
                         pd.hide();
-                        showSnackbar(response);
 
-                        if(response.equals("Login")){
+                      try{
 
-                            /*
+                          JSONObject jsonObject = new JSONObject(response);
 
-                             if ((u.equals(myUser)) && (p.equals(myPass))) {
-                            // do stuff
-                            }
-                              */
+                          System.out.println(jsonObject);
 
-                        }
+                          int status = jsonObject.getInt("status");
+                          String msg = jsonObject.getString("msg");
+
+                          if ( status == 1 ) {
+                              Toast.makeText(Login.this, "Bienvenido",
+                                      Toast.LENGTH_SHORT).show();
+
+                              Intent miIntent = new Intent(Login.this, Home.class);
+                              Bundle miBundle = new Bundle();
+                              miBundle.putString("correo", editTextEmail.getText().toString());
+                              miIntent.putExtras(miBundle);
+
+                              startActivity(miIntent);
+                          }else{
+
+                              Toast.makeText(Login.this,"Los datos ingresados no son validos",
+                                      Toast.LENGTH_LONG).show();
+                          }
+
+                      }catch (JSONException e){
+
+                          e.printStackTrace();
+                          Toast.makeText(Login.this,"Usuario no registrado",
+                                  Toast.LENGTH_LONG).show();
+                      }
 
                     }
                 },
@@ -148,7 +141,7 @@ public class Login extends AppCompatActivity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error
+
                         pd.hide();
                         Log.d("ErrorResponse", error.toString());
 
@@ -169,9 +162,4 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void showSnackbar(String stringSnackbar){
-        snackbar.make(findViewById(android.R.id.content), stringSnackbar.toString(), Snackbar.LENGTH_LONG)
-                .setActionTextColor(getResources().getColor(R.color.colorPrimary))
-                .show();
-    }
 }

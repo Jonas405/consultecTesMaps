@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorLetrasLogin">#ffffff</color>
     <color name="iniciocolor">#30e3ff</color>
-    <color name="voltaje">#f40004</color>
+    <color name="temperatura">#ff0004</color>
+    <color name="voltaje">#007bff</color>
     <color name="ControlTest">#000000</color>
 </resources>
